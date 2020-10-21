@@ -20,7 +20,7 @@ export const Home = () => {
             alt="logo"
             style={{ marginBottom: 12 }}
           />
-          Appen
+          CHATIFY
         </Header>
         {user && token ? (
           <Fragment>
@@ -31,12 +31,12 @@ export const Home = () => {
             />
             <br />
             <Button as={Link} to="/activities" size="huge" inverted>
-              Go to activities!
+              Go to chats!
             </Button>
           </Fragment>
         ) : (
           <Fragment>
-            <Header as="h2" inverted content="Welcome to Appen" />
+            <Header as="h1" inverted content="Welcome to Chatify" />
             <br />
 
             <LoginForm buttonName="Login" />

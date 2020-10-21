@@ -41,8 +41,9 @@ const ActivityDetailedSidebar: React.FC<IProps> = ({ attendees }) => {
                     {attendee.displayName}
                   </Link>
                 </Item.Header>
-                {attendee.isFollowed &&
-                <Item.Extra style={{ color: "orange" }}>Following</Item.Extra>}
+                {attendee.isFollowed && (
+                  <Item.Extra style={{ color: "orange" }}>Following</Item.Extra>
+                )}
               </Item.Content>
             </Item>
           ))}

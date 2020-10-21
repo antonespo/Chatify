@@ -23,21 +23,21 @@ const ActivityFilters = () => {
         <Menu.Item
           active={filters.size === 0}
           onClick={() => setFilters("all", "true")}
-          color={"blue"}
+          color={"teal"}
           name={"all"}
           content={"All Activities"}
         />
         <Menu.Item
           active={filters.has("isGoing")}
           onClick={() => setFilters("isGoing", "true")}
-          color={"blue"}
+          color={"teal"}
           name={"username"}
           content={"I'm Going"}
         />
         <Menu.Item
           active={filters.has("isHost")}
           onClick={() => setFilters("isHost", "true")}
-          color={"blue"}
+          color={"teal"}
           name={"host"}
           content={"I'm hosting"}
         />
@@ -53,7 +53,7 @@ const ActivityFilters = () => {
         <Menu.Item
           active={categoryFilter.size === 0}
           onClick={() => setCategoryFilter("all", "all")}
-          color={"blue"}
+          color={"teal"}
           name={"all"}
           content={"All categories"}
         />
@@ -65,7 +65,7 @@ const ActivityFilters = () => {
               categoryFilter.get("category") === c.value
             }
             onClick={() => setCategoryFilter("category", c.value)}
-            color={"blue"}
+            color={"teal"}
             name={c.key}
             content={c.text}
           />

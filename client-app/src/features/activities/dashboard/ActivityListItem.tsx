@@ -22,13 +22,13 @@ export const ActivityListItem: React.FC<IProps> = ({ activity }) => {
               <Item.Header
                 as={Link}
                 to={"/activities/" + activity.id}
-                style={{ color: "#427fe1", textDecoration: 'underline'}}
+                style={{ color: "#427fe1", textDecoration: "underline" }}
               >
                 {activity.title}
               </Item.Header>
               <Item.Description>
                 <Icon name="marker" />
-                {activity.venue + ", " + activity.city }
+                {activity.venue + ", " + activity.city}
                 <Icon name="clock" />
                 {format(activity.date, "k:mm")}
               </Item.Description>
@@ -52,7 +52,7 @@ export const ActivityListItem: React.FC<IProps> = ({ activity }) => {
                 <Item.Description>
                   <Label
                     basic
-                    color="green"
+                    color="teal"
                     content="You are going to this activity"
                   />
                 </Item.Description>

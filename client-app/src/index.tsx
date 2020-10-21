@@ -19,7 +19,7 @@ ReactDOM.render(
   <Router history={history}>
     <Helmet>
       <meta charSet="utf-8" />
-      <title>Appen - Find events and enjoy</title>
+      <title>Chatify - Talk about your interests and enjoy new people</title>
     </Helmet>
     <ScrollToTop />
     <App />

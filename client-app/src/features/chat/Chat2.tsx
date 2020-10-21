@@ -64,7 +64,7 @@ const Chat = () => {
       "primary-color": "#427fe1",
       "secondary-color": "#fbfbfb",
       "tertiary-color": "#fff",
-      "avatar-border-color": "blue",
+      "avatar-border-color": "teal",
     },
     AgentBar: {
       Avatar: {

@@ -15,7 +15,7 @@ const ModalPhotoUpload = () => {
         <Button
           floated="right"
           basic
-          color="blue"
+          color="teal"
           onClick={() => setModalOpen(true)}
         >
           <Icon name="camera" />

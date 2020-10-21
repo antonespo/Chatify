@@ -64,7 +64,7 @@ const ProfileHeader: React.FC<IProps> = ({
                   loading={followingProfile}
                   fluid
                   basic
-                  color={profile.isFollowed ? "red" : "green"}
+                  color={profile.isFollowed ? "red" : "teal"}
                   content={profile.isFollowed ? "Unfollow" : "Follow"}
                   onClick={
                     profile.isFollowed
