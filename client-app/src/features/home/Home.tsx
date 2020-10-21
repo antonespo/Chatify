@@ -30,7 +30,7 @@ export const Home = () => {
               content={"Welcome back " + user.displayName}
             />
             <br />
-            <Button as={Link} to="/activities" size="huge" inverted>
+            <Button as={Link} to="/topics" size="huge" inverted>
               Go to chats!
             </Button>
           </Fragment>

@@ -169,7 +169,7 @@ namespace API {
             app.UseMiddleware<ErrorHandlingMiddleware> ();
 
             //Per usare il middleware del delay nelle richieste http
-            // app.UseMiddleware<SleepMiddleware> ();
+            app.UseMiddleware<SleepMiddleware> ();
 
             if (env.IsDevelopment ()) {
                 //app.UseDeveloperExceptionPage ();

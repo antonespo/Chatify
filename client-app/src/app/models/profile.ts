@@ -20,9 +20,3 @@ export interface IPhoto {
   description: string;
 }
 
-export interface IActivityUser {
-  id: string;
-  title: string;
-  category: string;
-  date: Date;
-}

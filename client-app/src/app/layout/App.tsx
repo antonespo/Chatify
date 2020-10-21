@@ -4,16 +4,14 @@ import Navbar from "../../features/nav/Navbar";
 import { observer } from "mobx-react-lite";
 import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
 import { Route, Switch, Redirect } from "react-router-dom";
-import ActivityForm from "../../features/activities/form/ActivityForm";
 import Home from "../../features/home/Home";
-import ActivityDetails from "../../features/activities/details/ActivityDetails";
 import ScrollToTop from "./scrollToTop";
 import NotFound from "./NotFound";
 import { ToastContainer } from "react-toastify";
 import { RootStoreContext } from "../stores/rootStore";
 import { LoadingComponent } from "./LoadingComponent";
 import Chat from "./../../features/chat/Chat";
-import ProfilePage from './../../features/profiles/ProfilePage';
+import ProfilePage from "./../../features/profiles/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
 
 const App = () => {
@@ -29,7 +27,7 @@ const App = () => {
     if (token) {
       nestedFunc();
     }
-  }, [getUser]); 
+  }, [getUser]);
 
   if (token && !user) return <LoadingComponent content="Loading app..." />;
 
@@ -43,38 +41,12 @@ const App = () => {
 
         <PrivateRoute
           exact
-          path="/activities"
+          path="/topics"
           render={() => (
             <Fragment>
               <Navbar />
               <Container style={{ marginTop: "7em" }}>
                 <ActivityDashboard />
-              </Container>
-            </Fragment>
-          )}
-        />
-
-        <PrivateRoute
-          exact
-          path="/activities/:activityId"
-          render={(props) => (
-            <Fragment>
-              <Navbar />
-              <Container style={{ marginTop: "7em" }}>
-                <ActivityDetails {...props} />
-              </Container>
-            </Fragment>
-          )}
-        />
-
-        <PrivateRoute
-          exact
-          path={["/createActivity", "/manage/:activityId"]}
-          render={(props) => (
-            <Fragment>
-              <Navbar />
-              <Container style={{ marginTop: "7em" }}>
-                <ActivityForm {...props} />
               </Container>
             </Fragment>
           )}

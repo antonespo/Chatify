@@ -1,6 +1,6 @@
 import RootStore from "./rootStore";
 import { observable, action, runInAction, computed, reaction } from "mobx";
-import { IProfile, IPhoto, IActivityUser } from "../models/profile";
+import { IProfile, IPhoto } from "../models/profile";
 import { httpRequest } from "./../api/httpRequest";
 import { toast } from "react-toastify";
 
@@ -12,9 +12,9 @@ export default class ProfileStore {
     reaction(
       () => this.activeTab,
       (activeTab) => {
-        if (activeTab === 3) {
+        if (activeTab === 2) {
           this.loadFollowings("follower");
-        } else if (activeTab === 4) {
+        } else if (activeTab === 3) {
           this.loadFollowings("following");
         } else {
           this.followings = [];
@@ -33,8 +33,6 @@ export default class ProfileStore {
   @observable followingProfile = false;
   @observable followingsList = false;
   @observable activeTab: number = 0;
-  @observable activitiesUser: IActivityUser[] = [];
-  @observable loadingActivities = false; 
 
   @computed get isCurrentUser() {
     if (this.rootStore.UserStore.user && this.profile) {
@@ -65,22 +63,6 @@ export default class ProfileStore {
       console.log(error);
     }
   };
-
-  @action loadActivitiesUser = async (username: string, predicate?: string) =>{
-    this.loadingActivities = true; 
-    try{
-      const activities = await httpRequest.listActivities(username, predicate!);
-      runInAction(()=>{
-        this.activitiesUser = activities; 
-        this.loadingActivities = false;
-      })
-    }catch(error){
-      toast.error("Problem loading activities")
-      runInAction(()=>{
-        this.loadingActivities = false
-      })
-    }
-  }
 
   @action uploadPhoto = async (file: Blob, description: string) => {
     this.upladingPhoto = true;
@@ -145,12 +127,13 @@ export default class ProfileStore {
   };
 
   @action updateProfile = async (profile: IProfile) => {
+    // SOME BUGS FIND -------- SOLVE IT
     this.updatingProfile = true;
     try {
       var profileEdit = { ...profile };
-      delete profile.photos;
-      delete profile.image;
-      delete profile.username;
+      // delete profile.photos;
+      // delete profile.image;
+      // delete profile.username;
       await httpRequest.putProfile(profile);
       runInAction(() => {
         this.profile = profileEdit;
@@ -207,6 +190,7 @@ export default class ProfileStore {
         predicate
       );
       runInAction(() => {
+        console.log(profiles);
         this.followings = profiles;
         this.followingsList = false;
       });

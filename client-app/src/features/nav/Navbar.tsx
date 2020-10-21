@@ -6,7 +6,6 @@ import { RootStoreContext } from "../../app/stores/rootStore";
 
 const Navbar: React.FC = () => {
   const RootStore = useContext(RootStoreContext);
-  const { initializeEmptyForm } = RootStore.ActivityStore;
   const { user, logout } = RootStore.UserStore;
 
   return (
@@ -20,17 +19,8 @@ const Navbar: React.FC = () => {
           />
           CHATIFY
         </Menu.Item>
-        <Menu.Item name="Activities" as={NavLink} to="/activities" />
+        <Menu.Item name="Topics" as={NavLink} to="/topics" />
         <Menu.Item name="Chat" as={NavLink} to="/chat" />
-        <Menu.Item>
-          <Button
-            as={NavLink}
-            to="/createActivity"
-            onClick={initializeEmptyForm}
-            positive
-            content="Create Activity"
-          />
-        </Menu.Item>
         {user && (
           <Menu.Item position="right">
             <Image

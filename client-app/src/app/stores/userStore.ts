@@ -23,7 +23,7 @@ export default class UserStore {
         this.user = user;
         this.rootStore.CommonStore.setToken(user.token);
       });
-      history.push("/activities");
+      history.push("/topics");
     } catch (error) {
       throw error;
     }
@@ -54,7 +54,7 @@ export default class UserStore {
         this.user = user;
         this.rootStore.CommonStore.setToken(user.token);
       });
-      history.push("/activities");
+      history.push("/topics");
     } catch (error) {
       throw error;
     }
