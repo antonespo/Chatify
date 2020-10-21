@@ -26,12 +26,10 @@ namespace Application.Photos {
             private readonly DataContext context;
             private readonly IUserAccessor userAccessor;
             private readonly IPhotoAccessor photoAccessor;
-            private readonly IMapper mapper;
 
             public Handler (DataContext context, 
             IUserAccessor userAccessor, 
-            IPhotoAccessor photoAccessor, IMapper mapper) {
-                this.mapper = mapper;
+            IPhotoAccessor photoAccessor) {
                 this.photoAccessor = photoAccessor;
                 this.context = context;
                 this.userAccessor = userAccessor;

@@ -17,7 +17,8 @@ const Navbar: React.FC = () => {
             src="/assets/logoAppen.png"
             alt="logo"
             style={{ marginRight: "10px" }}
-          />Appen
+          />
+          CHATIFY
         </Menu.Item>
         <Menu.Item name="Activities" as={NavLink} to="/activities" />
         <Menu.Item name="Chat" as={NavLink} to="/chat" />
@@ -41,7 +42,7 @@ const Navbar: React.FC = () => {
               <Dropdown.Menu>
                 <Dropdown.Item
                   as={Link}
-                  to={'/profile/'+user.username}
+                  to={"/profile/" + user.username}
                   text="My profile"
                   icon="user"
                 />

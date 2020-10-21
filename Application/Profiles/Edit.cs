@@ -28,12 +28,10 @@ namespace Application.Profiles {
         }
         public class Handler : IRequestHandler<Command> {
             private readonly DataContext context;
-            private readonly IMapper mapper;
             private readonly IUserAccessor userAccessor;
 
-            public Handler (DataContext context, IMapper mapper, IUserAccessor userAccessor) {
+            public Handler (DataContext context, IUserAccessor userAccessor) {
                 this.userAccessor = userAccessor;
-                this.mapper = mapper;
                 this.context = context;
             }
 

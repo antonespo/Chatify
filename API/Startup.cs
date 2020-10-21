@@ -88,19 +88,19 @@ namespace API {
             services.AddTransient<DataContext> ();
 
             // Per configurare MediatR
-            services.AddMediatR (typeof (Application.Activities.Details.Handler).Assembly);
+            services.AddMediatR (typeof (Application.Messages.Create.Handler).Assembly);
 
             // Per configiurare SignalR
             services.AddSignalR ();
 
             // Per configurare Automapper
-            services.AddAutoMapper (typeof (Application.Activities.Details.Handler));
-            services.AddScoped (provider => new MapperConfiguration (cfg => {
-                cfg.AddProfile (new Application.Activities.MappingProfile (
-                    provider.GetService<DataContext> (),
-                    provider.GetService<IUserAccessor> ()));
-                cfg.AddProfile (new Application.Comments.MappingProfile ());
-            }).CreateMapper ());
+            //services.AddAutoMapper (typeof (Application.Activities.Details.Handler));
+            //services.AddScoped (provider => new MapperConfiguration (cfg => {
+            //    cfg.AddProfile (new Application.Activities.MappingProfile (
+            //        provider.GetService<DataContext> (),
+            //        provider.GetService<IUserAccessor> ()));
+            //    cfg.AddProfile (new Application.Comments.MappingProfile ());
+            //}).CreateMapper ());
 
             // Per configurare i controller con: 
             //  - Autorizzazione su tutti gli url con token (con le opt) 
@@ -116,7 +116,7 @@ namespace API {
 
                 })
                 .AddFluentValidation (cfg => {
-                    cfg.RegisterValidatorsFromAssemblyContaining<Application.Activities.Create> ();
+                    cfg.RegisterValidatorsFromAssemblyContaining<Application.Profiles.Edit> ();
                 });
 
             // Per configurare Identity Core
@@ -124,14 +124,6 @@ namespace API {
             var identityBuilder = new IdentityBuilder (builder.UserType, builder.Services);
             identityBuilder.AddEntityFrameworkStores<DataContext> ();
             identityBuilder.AddSignInManager<SignInManager<AppUser>> ();
-
-            // Per aggiungere Authorization Policy per chi hosta una activity
-            services.AddAuthorization (opt => {
-                opt.AddPolicy ("IsActivityHost", policy => {
-                    policy.Requirements.Add (new IsHostRequirement ());
-                });
-            });
-            services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler> ();
 
             // Per configurare Authorization e SignalR
             var key = new SymmetricSecurityKey (Encoding.UTF8.GetBytes (Configuration["TokenKey"]));
@@ -210,10 +202,9 @@ namespace API {
                 endpoints.MapControllers ();
                 // Per configiurare SignalR
                 endpoints.MapHub<ChatHub> ("/chat");
-                endpoints.MapHub<CommentHub> ("/comment");
                 // Tutte le route non conosciute vengono indirizzate a questo controller 
                 // che in particolare non fa altro che lanciare la nostra app richiamando il file in wwwroot
-                endpoints.MapFallbackToController ("Index", "Fallback");
+                //endpoints.MapFallbackToController ("Index", "Fallback");
             });
 
         }

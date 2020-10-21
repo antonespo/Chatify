@@ -34,7 +34,7 @@ const LoginForm = () => {
         <Form onSubmit={handleSubmit} error>
           <Header
             as="h3"
-            content="Login to Appen"
+            content="Login to Chatify"
             color="teal"
             textAlign="center"
           />

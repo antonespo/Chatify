@@ -36,7 +36,7 @@ const RegisterForm = () => {
         <Form onSubmit={handleSubmit} error>
           <Header
             as="h3"
-            content="Sign up to Appen"
+            content="Sign up to Chatify"
             color="teal"
             textAlign="center"
           />

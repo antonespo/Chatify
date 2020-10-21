@@ -26,10 +26,8 @@ namespace Application.Photos {
         public class Handler : IRequestHandler<Command> {
             private readonly DataContext context;
             private readonly IUserAccessor userAccessor;
-            private readonly IMapper mapper;
 
-            public Handler (DataContext context, IUserAccessor userAccessor, IPhotoAccessor photoAccessor, IMapper mapper) {
-                this.mapper = mapper;
+            public Handler (DataContext context, IUserAccessor userAccessor) {
                 this.context = context;
                 this.userAccessor = userAccessor;
             }
