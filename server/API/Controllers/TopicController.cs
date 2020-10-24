@@ -1,20 +1,18 @@
-﻿using System;
+﻿using Application.Topics;
+using Domain;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Messages;
-using Domain;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class MessageController : BaseController
+    public class TopicController : BaseController
     {
-        // POST: api/message
+        // POST: api/topic
         [HttpPost]
-        public async Task<ActionResult<Message>> Add(Create.Command command)
+        public async Task<ActionResult<Topic>> Add(Create.Command command)
         {
             return await Mediator.Send(command);
         }
