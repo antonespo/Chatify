@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Errors;
 using Application.Interfaces;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,20 +13,22 @@ using Persistence;
 
 namespace Application.Messages {
     public class Create {
-        public class Command : IRequest<Message> {
+        public class Command : IRequest<MessageDto> {
             public string Body { get; set; }
             public string UserName { get; set; }
             public Guid TopicId { get; set; }
         }
 
-        public class Handler : IRequestHandler<Command, Message> {
+        public class Handler : IRequestHandler<Command, MessageDto> {
             private readonly DataContext context;
+            private readonly IMapper mapper;
 
-            public Handler (DataContext context) {
+            public Handler (DataContext context, IMapper mapper ) {
                 this.context = context;
+                this.mapper = mapper;
             }
 
-            public async Task<Message> Handle (Command request, CancellationToken cancellationToken) {
+            public async Task<MessageDto> Handle (Command request, CancellationToken cancellationToken) {
                 var topic = await context.Topic.SingleOrDefaultAsync(x => x.Id == request.TopicId); 
 
                 if(topic == null)
@@ -65,7 +68,7 @@ namespace Application.Messages {
                 context.Message.Add (message);
                 var success = await context.SaveChangesAsync () > 0;
                 if (success) {
-                    return message;
+                    return mapper.Map<Message, MessageDto>(message); 
                 } else {
                     throw new Exception ("Problem saving changes");
                 }

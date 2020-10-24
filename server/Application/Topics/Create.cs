@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Application.Errors;
 using Application.Followers;
 using Application.Interfaces;
+using AutoMapper;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -15,7 +16,7 @@ using Persistence;
 
 namespace Application.Topics {
     public class Create {
-        public class Command : IRequest<Topic> {
+        public class Command : IRequest<TopicDto> {
             public string Name { get; set; }
             public string Description { get; set; }
             public string UserName { get; set; }
@@ -30,14 +31,16 @@ namespace Application.Topics {
             }
         }
 
-        public class Handler : IRequestHandler<Command, Topic> {
+        public class Handler : IRequestHandler<Command, TopicDto> {
             private readonly DataContext context;
+            private readonly IMapper mapper;
 
-            public Handler (DataContext context) {
+            public Handler (DataContext context, IMapper mapper) {
                 this.context = context;
+                this.mapper = mapper;
             }
 
-            public async Task<Topic> Handle (Command request, CancellationToken cancellationToken) {
+            public async Task<TopicDto> Handle (Command request, CancellationToken cancellationToken) {
                 var existingTopic = await context.Topic.SingleOrDefaultAsync(x => x.Name == request.Name); 
 
                 if(existingTopic != null)
@@ -71,7 +74,7 @@ namespace Application.Topics {
 
                 var success = await context.SaveChangesAsync () > 0;
                 if (success) {
-                    return topic;
+                    return mapper.Map<Topic, TopicDto>(topic);
                 } else {
                     throw new Exception ("Problem saving changes");
                 }

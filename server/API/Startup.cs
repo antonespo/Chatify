@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,13 +95,16 @@ namespace API {
             services.AddSignalR ();
 
             // Per configurare Automapper
-            //services.AddAutoMapper (typeof (Application.Activities.Details.Handler));
-            //services.AddScoped (provider => new MapperConfiguration (cfg => {
-            //    cfg.AddProfile (new Application.Activities.MappingProfile (
-            //        provider.GetService<DataContext> (),
-            //        provider.GetService<IUserAccessor> ()));
-            //    cfg.AddProfile (new Application.Comments.MappingProfile ());
-            //}).CreateMapper ());
+            services.AddAutoMapper(typeof(Application.Messages.List.Handler));
+            services.AddScoped(provider => new MapperConfiguration(cfg =>
+            {
+                //cfg.AddProfile(new Application.Activities.MappingProfile(
+                //    provider.GetService<DataContext>(),
+                //    provider.GetService<IUserAccessor>()));
+                cfg.AddProfile(new Application.Common.MappingProfile());
+                cfg.AddProfile(new Application.Messages.MappingProfile());
+                cfg.AddProfile(new Application.Topics.MappingProfile());
+            }).CreateMapper());
 
             // Per configurare i controller con: 
             //  - Autorizzazione su tutti gli url con token (con le opt) 
