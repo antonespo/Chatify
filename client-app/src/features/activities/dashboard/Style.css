@@ -1,0 +1,16 @@
+.attendeeWidget {
+  display: inline-flex;
+}
+
+.likeWidget {
+  display: inline-flex;
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  padding: 0px;
+}
