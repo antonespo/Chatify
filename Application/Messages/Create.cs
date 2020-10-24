@@ -22,7 +22,6 @@ namespace Application.Messages {
             public async Task<Message> Handle (Command request, CancellationToken cancellationToken) {
                 var message = new Message {
                     Body = request.Body,
-                    CreateAt = DateTime.Now,
                     UserName = request.User.UserName
                 };
 

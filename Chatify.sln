@@ -11,28 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{A5F8C2F5-DB6A-4559-85F3-91D1C8BDA35F}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "client-app", "client-app\", "{DD5D1612-38D9-4D4E-B6B5-92BEFF16F2E2}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_11676"
-		Debug.AspNetCompiler.PhysicalPath = "client-app\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_11676\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_11676"
-		Release.AspNetCompiler.PhysicalPath = "client-app\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_11676\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "11676"
-		SlnRelativePath = "client-app\"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{098E6BE7-1D67-4E1E-8B0B-F86CE96A4645}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{098E6BE7-1D67-4E1E-8B0B-F86CE96A4645}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,9 +35,6 @@ Global
 		{A5F8C2F5-DB6A-4559-85F3-91D1C8BDA35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5F8C2F5-DB6A-4559-85F3-91D1C8BDA35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5F8C2F5-DB6A-4559-85F3-91D1C8BDA35F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD5D1612-38D9-4D4E-B6B5-92BEFF16F2E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD5D1612-38D9-4D4E-B6B5-92BEFF16F2E2}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD5D1612-38D9-4D4E-B6B5-92BEFF16F2E2}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{098E6BE7-1D67-4E1E-8B0B-F86CE96A4645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{098E6BE7-1D67-4E1E-8B0B-F86CE96A4645}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{098E6BE7-1D67-4E1E-8B0B-F86CE96A4645}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -49,7 +49,6 @@ namespace Application.Photos {
                 var photo = new Photo {
                     Id = photoUploadResult.PublicId,
                     Url = photoUploadResult.Url,
-                    Date = DateTime.Now,
                     Description = request.Description,
                     AppUser = user
                 };

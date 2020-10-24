@@ -45,7 +45,7 @@ namespace API {
             // Per configurare il context con LazyLoading
             services.AddDbContext<DataContext> (opt => {
                 opt.UseLazyLoadingProxies ();
-                opt.UseSqlite (Configuration.GetConnectionString ("DefaultConnection"));
+                opt.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection"));
             });
 
             //Chiamo il ConfigureServices con configurazioni comuni a prod o dev

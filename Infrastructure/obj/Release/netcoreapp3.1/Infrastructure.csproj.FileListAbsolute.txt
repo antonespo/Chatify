@@ -1,0 +1,16 @@
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\bin\Release\netcoreapp3.1\Infrastructure.deps.json
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\bin\Release\netcoreapp3.1\Infrastructure.dll
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\bin\Release\netcoreapp3.1\Infrastructure.pdb
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\bin\Release\netcoreapp3.1\Application.dll
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\bin\Release\netcoreapp3.1\Domain.dll
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\bin\Release\netcoreapp3.1\Persistence.dll
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\bin\Release\netcoreapp3.1\Application.pdb
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\bin\Release\netcoreapp3.1\Domain.pdb
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\bin\Release\netcoreapp3.1\Persistence.pdb
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.csprojAssemblyReference.cache
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.AssemblyInfoInputs.cache
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.AssemblyInfo.cs
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.csproj.CoreCompileInputs.cache
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.csproj.CopyComplete
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.dll
+D:\anton\Progetti\20-Reactivities\Appen\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.pdb

@@ -29,14 +29,14 @@ namespace Persistence
                     Id = "asd7",
                     Url = "https://res.cloudinary.com/antonespo/image/upload/v1592066265/ixwxzgpmiuya7a6wlicg.jpg",
                     IsMain = true,
-                    Date = DateTime.Now.AddDays (-2),
+                    CreatedAt = DateTime.Now.AddDays (-2),
                     Description = "Descrizione di questa foto di Bob con la camicia",
                     },
                     new Photo {
                     Id = "asd8",
                     Url = "https://res.cloudinary.com/antonespo/image/upload/v1592065799/h4ux5pihtnujxg5h7i2q.jpg",
                     IsMain = false,
-                    Date = DateTime.Now.AddDays (-2),
+                    CreatedAt = DateTime.Now.AddDays (-2),
                     Description = "Descrizione di questa foto di Bob di profilo ",
                     }
                     }
@@ -55,14 +55,14 @@ namespace Persistence
                     Id = "asd5",
                     Url = "https://res.cloudinary.com/antonespo/image/upload/v1592752163/lutdw8fbpcwjaktbfkd3.jpg",
                     IsMain = true,
-                    Date = DateTime.Now.AddDays (-2),
+                    CreatedAt = DateTime.Now.AddDays (-2),
                     Description = "Descrizione di questa foto di Jane che ride",
                     },
                     new Photo {
                     Id = "asd6",
                     Url = "https://res.cloudinary.com/antonespo/image/upload/v1592752203/vegg3czvtvc37akcmfck.jpg",
                     IsMain = false,
-                    Date = DateTime.Now.AddDays (-2),
+                    CreatedAt = DateTime.Now.AddDays (-2),
                     Description = "Descrizione di questa foto di Jane ",
                     }
                     }
@@ -81,14 +81,14 @@ namespace Persistence
                     Id = "asd3",
                     Url = "https://res.cloudinary.com/antonespo/image/upload/v1591538719/jjorprsx8uufmfiu5ugn.jpg",
                     IsMain = true,
-                    Date = DateTime.Now.AddDays (-2),
+                    CreatedAt = DateTime.Now.AddDays (-2),
                     Description = "Descrizione di questa foto di Tom che ride",
                     },
                     new Photo {
                     Id = "asd4",
                     Url = "https://res.cloudinary.com/antonespo/image/upload/v1591822854/eod88fdogp5jpn5caqqy.jpg",
                     IsMain = false,
-                    Date = DateTime.Now.AddDays (-2),
+                    CreatedAt = DateTime.Now.AddDays (-2),
                     Description = "Descrizione di questa foto di Tom ",
                     }
                     }
@@ -107,14 +107,14 @@ namespace Persistence
                     Id = "asd1",
                     Url = "https://res.cloudinary.com/antonespo/image/upload/v1591737399/bmwe8figgee9ivu126sg.jpg",
                     IsMain = true,
-                    Date = DateTime.Now.AddDays (-2),
+                    CreatedAt = DateTime.Now.AddDays (-2),
                     Description = "Descrizione di questa foto di Antonio",
                     },
                     new Photo {
                     Id = "asd2",
                     Url = "https://res.cloudinary.com/antonespo/image/upload/v1591539123/xsuk3dobuaein4f4ad9g.jpg",
                     IsMain = false,
-                    Date = DateTime.Now.AddDays (-2),
+                    CreatedAt = DateTime.Now.AddDays (-2),
                     Description = "Descrizione di questa foto di Antonio. Con la mia giacca. ",
                     }
                     }

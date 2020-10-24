@@ -1,6 +1,6 @@
 namespace Domain
 {
-    public class UserFollowing
+    public class UserFollowing :DateTimeReference
     {
         public string ObserverId { get; set; }
         public virtual AppUser Observer { get; set; }
