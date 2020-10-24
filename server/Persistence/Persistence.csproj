@@ -3,24 +3,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Migrations\20200928093105_afds.cs" />
-    <Compile Remove="Migrations\20200928093105_afds.Designer.cs" />
-    <Compile Remove="Migrations\20200928093943_NotNullColumns.cs" />
-    <Compile Remove="Migrations\20200928093943_NotNullColumns.Designer.cs" />
-    <Compile Remove="Migrations\20200928094250_NotNullColumns2.cs" />
-    <Compile Remove="Migrations\20200928094250_NotNullColumns2.Designer.cs" />
-    <Compile Remove="Migrations\20200928094406_NotNullColumns2.cs" />
-    <Compile Remove="Migrations\20200928094406_NotNullColumns2.Designer.cs" />
-    <Compile Remove="Migrations\20200928094559_NotNullColumns2.cs" />
-    <Compile Remove="Migrations\20200928094559_NotNullColumns2.Designer.cs" />
-    <Compile Remove="Migrations\20200928105916_NotNullColumns.cs" />
-    <Compile Remove="Migrations\20200928105916_NotNullColumns.Designer.cs" />
-    <Compile Remove="Migrations\20200928110206_NotNullColumns.cs" />
-    <Compile Remove="Migrations\20200928110206_NotNullColumns.Designer.cs" />
-    <Compile Remove="Migrations\20200928110620_NotNullColumns.cs" />
-    <Compile Remove="Migrations\20200928110620_NotNullColumns.Designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>

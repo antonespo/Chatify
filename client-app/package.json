@@ -54,7 +54,8 @@
     "semantic-ui-react": "^0.88.2",
     "typescript": "^3.7.5",
     "use-async-effect": "^2.2.2",
-    "uuid": "^7.0.3"
+    "uuid": "^7.0.3",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201014194710_Initial")]
-    partial class Initial
+    [Migration("20201024143323_RequiredProperty2")]
+    partial class RequiredProperty2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,35 +20,6 @@ namespace Persistence.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Domain.Activity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Venue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Activity");
-                });
 
             modelBuilder.Entity("Domain.AppUser", b =>
                 {
@@ -130,70 +101,29 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Domain.Attendee", b =>
-                {
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("ActivityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateJoined")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsHost")
-                        .HasColumnType("bit");
-
-                    b.HasKey("AppUserId", "ActivityId");
-
-                    b.HasIndex("ActivityId");
-
-                    b.ToTable("Attendee");
-                });
-
-            modelBuilder.Entity("Domain.Comment", b =>
+            modelBuilder.Entity("Domain.Member", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ActivityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Body")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("Comment");
-                });
-
-            modelBuilder.Entity("Domain.Like", b =>
-                {
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("ActivityId")
+                    b.Property<Guid>("TopicId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DateLiked")
-                        .HasColumnType("datetime2");
+                    b.HasKey("Id");
 
-                    b.HasKey("AppUserId", "ActivityId");
+                    b.HasIndex("AppUserId");
 
-                    b.HasIndex("ActivityId");
+                    b.HasIndex("TopicId");
 
-                    b.ToTable("Like");
+                    b.ToTable("Member");
                 });
 
             modelBuilder.Entity("Domain.Message", b =>
@@ -202,16 +132,24 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("TopicId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("TopicId");
 
                     b.ToTable("Message");
                 });
@@ -222,9 +160,10 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -243,6 +182,26 @@ namespace Persistence.Migrations
                     b.ToTable("Photo");
                 });
 
+            modelBuilder.Entity("Domain.Topic", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Topic");
+                });
+
             modelBuilder.Entity("Domain.UserFollowing", b =>
                 {
                     b.Property<string>("ObserverId")
@@ -250,6 +209,9 @@ namespace Persistence.Migrations
 
                     b.Property<string>("TargetId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ObserverId", "TargetId");
 
@@ -389,45 +351,32 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.Attendee", b =>
+            modelBuilder.Entity("Domain.Member", b =>
                 {
-                    b.HasOne("Domain.Activity", "Activity")
-                        .WithMany("Attendee")
-                        .HasForeignKey("ActivityId")
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithMany("Members")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.AppUser", "AppUser")
-                        .WithMany("Attendees")
-                        .HasForeignKey("AppUserId")
+                    b.HasOne("Domain.Topic", "Topic")
+                        .WithMany("Members")
+                        .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Comment", b =>
+            modelBuilder.Entity("Domain.Message", b =>
                 {
-                    b.HasOne("Domain.Activity", "Activity")
-                        .WithMany("Comment")
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.AppUser", "Author")
                         .WithMany()
-                        .HasForeignKey("AuthorId");
-                });
-
-            modelBuilder.Entity("Domain.Like", b =>
-                {
-                    b.HasOne("Domain.Activity", "Activity")
-                        .WithMany("Like")
-                        .HasForeignKey("ActivityId")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.AppUser", "AppUser")
-                        .WithMany("Likes")
-                        .HasForeignKey("AppUserId")
+                    b.HasOne("Domain.Topic", "Topic")
+                        .WithMany("Messages")
+                        .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -436,7 +385,9 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.AppUser", "AppUser")
                         .WithMany("Photos")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.UserFollowing", b =>

@@ -27,7 +27,7 @@ namespace API.SignalR {
 
             var user = context.Users.FirstOrDefault (x => x.UserName == username);
             if (user != null) {
-                command.User = user;
+                command.UserName = user.UserName;
             }
 
             var message = await mediator.Send (command);

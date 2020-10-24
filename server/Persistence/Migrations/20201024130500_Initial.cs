@@ -8,23 +8,6 @@ namespace Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Activity",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Category = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    City = table.Column<string>(nullable: true),
-                    Venue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Activity", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -36,6 +19,41 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Topic",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Topic", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,46 +79,18 @@ namespace Persistence.Migrations
                     Bio = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: true),
-                    Phone = table.Column<string>(nullable: true)
+                    Phone = table.Column<string>(nullable: true),
+                    TopicId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Message",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Body = table.Column<string>(nullable: true),
-                    CreateAt = table.Column<DateTime>(nullable: false),
-                    UserName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Message", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
+                        name: "FK_AspNetUsers_Topic_TopicId",
+                        column: x => x.TopicId,
+                        principalTable: "Topic",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,64 +179,12 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attendee",
-                columns: table => new
-                {
-                    AppUserId = table.Column<string>(nullable: false),
-                    ActivityId = table.Column<Guid>(nullable: false),
-                    DateJoined = table.Column<DateTime>(nullable: false),
-                    IsHost = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Attendee", x => new { x.AppUserId, x.ActivityId });
-                    table.ForeignKey(
-                        name: "FK_Attendee_Activity_ActivityId",
-                        column: x => x.ActivityId,
-                        principalTable: "Activity",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Attendee_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comment",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Body = table.Column<string>(nullable: true),
-                    AuthorId = table.Column<string>(nullable: true),
-                    ActivityId = table.Column<Guid>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comment_Activity_ActivityId",
-                        column: x => x.ActivityId,
-                        principalTable: "Activity",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Comment_AspNetUsers_AuthorId",
-                        column: x => x.AuthorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Followings",
                 columns: table => new
                 {
                     ObserverId = table.Column<string>(nullable: false),
-                    TargetId = table.Column<string>(nullable: false)
+                    TargetId = table.Column<string>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -266,26 +204,29 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Like",
+                name: "Message",
                 columns: table => new
                 {
-                    AppUserId = table.Column<string>(nullable: false),
-                    ActivityId = table.Column<Guid>(nullable: false),
-                    DateLiked = table.Column<DateTime>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    Body = table.Column<string>(nullable: true),
+                    AuthorId = table.Column<Guid>(nullable: false),
+                    AuthorId1 = table.Column<string>(nullable: true),
+                    TopicId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Like", x => new { x.AppUserId, x.ActivityId });
+                    table.PrimaryKey("PK_Message", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Like_Activity_ActivityId",
-                        column: x => x.ActivityId,
-                        principalTable: "Activity",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Like_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_Message_AspNetUsers_AuthorId1",
+                        column: x => x.AuthorId1,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Message_Topic_TopicId",
+                        column: x => x.TopicId,
+                        principalTable: "Topic",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -295,9 +236,9 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
                     Url = table.Column<string>(nullable: true),
                     IsMain = table.Column<bool>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     AppUserId = table.Column<string>(nullable: true)
                 },
@@ -352,19 +293,9 @@ namespace Persistence.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attendee_ActivityId",
-                table: "Attendee",
-                column: "ActivityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comment_ActivityId",
-                table: "Comment",
-                column: "ActivityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comment_AuthorId",
-                table: "Comment",
-                column: "AuthorId");
+                name: "IX_AspNetUsers_TopicId",
+                table: "AspNetUsers",
+                column: "TopicId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Followings_TargetId",
@@ -372,9 +303,14 @@ namespace Persistence.Migrations
                 column: "TargetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Like_ActivityId",
-                table: "Like",
-                column: "ActivityId");
+                name: "IX_Message_AuthorId1",
+                table: "Message",
+                column: "AuthorId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Message_TopicId",
+                table: "Message",
+                column: "TopicId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photo_AppUserId",
@@ -400,16 +336,7 @@ namespace Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Attendee");
-
-            migrationBuilder.DropTable(
-                name: "Comment");
-
-            migrationBuilder.DropTable(
                 name: "Followings");
-
-            migrationBuilder.DropTable(
-                name: "Like");
 
             migrationBuilder.DropTable(
                 name: "Message");
@@ -421,10 +348,10 @@ namespace Persistence.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Activity");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Topic");
         }
     }
 }

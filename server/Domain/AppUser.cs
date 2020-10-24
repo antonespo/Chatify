@@ -11,6 +11,7 @@ namespace Domain {
         public DateTime? DateOfBirth { get; set; }
         public string Phone { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<Member> Members { get; set; }
         public virtual ICollection<UserFollowing> Followings { get; set; }
         public virtual ICollection<UserFollowing> Followers { get; set; }
     }

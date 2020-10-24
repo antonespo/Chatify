@@ -12,6 +12,8 @@ namespace Persistence {
         public DataContext (DbContextOptions options) : base (options) { }
 
         public DbSet<Message> Message { get; set; }
+        public DbSet<Topic> Topic { get; set; }
+        public DbSet<Member> Member { get; set; }
         public DbSet<Photo> Photo { get; set; }
         public DbSet<UserFollowing> Followings { get; set; }
 
@@ -34,6 +36,18 @@ namespace Persistence {
                 .HasForeignKey (x => x.TargetId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // Not null foreign key
+            builder.Entity<Message>()
+                    .Property(t => t.AuthorId)
+                    .IsRequired();
+
+            builder.Entity<Photo>()
+                    .Property(t => t.AppUserId)
+                    .IsRequired();
+
+            builder.Entity<Member>()
+                    .Property(t => t.AppUserId)
+                    .IsRequired();
         }
 
         // Override the save changes function to update automatically the timestamp in the tables
