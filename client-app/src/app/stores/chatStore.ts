@@ -16,8 +16,6 @@ export default class ChatStore {
 
   @observable loadingChat = true;
 
-  @observable topic: string = "b633e8ff-f7f7-450b-dade-08d8782ed138";
-
   @observable messages: IMessageDto[] = [];
 
   @observable.ref hubConnection: HubConnection | null = null;
@@ -27,7 +25,7 @@ export default class ChatStore {
   };
 
   @action setMessages = (messages: IMessageDto[]) => {
-    this.messages = this.messages.concat(messages);
+    this.messages = messages;
   };
 
   @action createHubConnection = async () => {
@@ -50,7 +48,7 @@ export default class ChatStore {
     });
 
     this.hubConnection.on("NewViewer", (message: string) => {
-      toast.info(message, { position: "top-right" });
+      toast.info(message + this.rootStore.TopicStore.currentTopic?.name, { position: "top-right" });
     });
   };
 
@@ -59,8 +57,14 @@ export default class ChatStore {
       ?.start()
       .then(() => console.log(this.hubConnection?.state))
       .then(async () => {
-        await this.hubConnection!.invoke("SendAllMessages", this.topic);
-        await this.hubConnection!.invoke("AddToGroup", this.topic);
+        await this.hubConnection!.invoke(
+          "SendAllMessages",
+          this.rootStore.TopicStore.currentTopic?.id
+        );
+        await this.hubConnection!.invoke(
+          "AddToGroup",
+          this.rootStore.TopicStore.currentTopic?.id
+        );
         runInAction(() => {
           this.loadingChat = false;
         });
@@ -75,10 +79,14 @@ export default class ChatStore {
   };
 
   @action stopHubConnection = () => {
-    this.hubConnection!.invoke("RemoveFromGroup", this.topic)
+    this.hubConnection!.invoke(
+      "RemoveFromGroup",
+      this.rootStore.TopicStore.currentTopic?.id
+    )
       .then(() => {
         this.hubConnection!.stop();
-        console.log(this.messages);
+        this.rootStore.TopicStore.setCurrentTopic(null);
+        this.setMessages([]);
       })
       .catch((error) => console.log(error));
   };

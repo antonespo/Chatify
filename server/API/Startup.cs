@@ -153,7 +153,7 @@ namespace API {
                             var accessToken = context.Request.Query["access_token"];
                             var path = context.HttpContext.Request.Path;
                             if (!string.IsNullOrEmpty (accessToken) &&
-                                ((path.StartsWithSegments ("/chat")) || (path.StartsWithSegments ("/comment")))) {
+                                ((path.StartsWithSegments ("/chat")) || (path.StartsWithSegments("/topic")))) {
                                 context.Token = accessToken;
                             }
                             return Task.CompletedTask;
@@ -173,7 +173,7 @@ namespace API {
             app.UseMiddleware<ErrorHandlingMiddleware> ();
 
             //Per usare il middleware del delay nelle richieste http
-            app.UseMiddleware<SleepMiddleware> ();
+            //app.UseMiddleware<SleepMiddleware> ();
 
             if (env.IsDevelopment ()) {
                 //app.UseDeveloperExceptionPage ();
@@ -206,6 +206,7 @@ namespace API {
                 endpoints.MapControllers ();
                 // Per configiurare SignalR
                 endpoints.MapHub<ChatHub> ("/chat");
+                endpoints.MapHub<TopicHub> ("/topic");
                 // Tutte le route non conosciute vengono indirizzate a questo controller 
                 // che in particolare non fa altro che lanciare la nostra app richiamando il file in wwwroot
                 //endpoints.MapFallbackToController ("Index", "Fallback");

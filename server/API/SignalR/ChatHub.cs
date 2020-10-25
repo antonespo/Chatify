@@ -46,8 +46,8 @@ namespace API.SignalR {
 
             await Groups.AddToGroupAsync (Context.ConnectionId, topicIdGroup);
 
-            await Clients.Group (topicIdGroup)
-                .SendAsync ("NewViewer", $"{username} has joined the group {topicIdGroup}.");
+            await Clients.OthersInGroup (topicIdGroup)
+                .SendAsync ("NewViewer", $"{username} has joined the topic ");
         }
 
         public async Task RemoveFromGroup (string topicIdGroup) {

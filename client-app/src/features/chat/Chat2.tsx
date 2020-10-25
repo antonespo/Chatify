@@ -52,11 +52,11 @@ const Chat = () => {
   }, [createHubConnection, stopHubConnection]);
 
   const messageSide = (message: IMessage) => {
-    if (message.userName === user?.username) {
-      return "right";
-    } else {
-      return "left";
-    }
+    // if (message.userName === user?.username) {
+    //   return "right";
+    // } else {
+    //   return "left";
+    // }
   };
 
   const theme = {

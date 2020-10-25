@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Container } from "semantic-ui-react";
 import Navbar from "../../features/nav/Navbar";
 import { observer } from "mobx-react-lite";
-import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
+import ActivityDashboard from "../../features/topics/dashboard/TopicDashboard";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "../../features/home/Home";
 import ScrollToTop from "./scrollToTop";

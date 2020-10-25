@@ -20,7 +20,6 @@ const Navbar: React.FC = () => {
           CHATIFY
         </Menu.Item>
         <Menu.Item name="Topics" as={NavLink} to="/topics" />
-        <Menu.Item name="Chat" as={NavLink} to="/chat" />
         {user && (
           <Menu.Item position="right">
             <Image

@@ -2,7 +2,6 @@ import { IBasicAppUser } from './profile';
 
 export interface IMessage {
   body: string;
-  userName: string;
   topicId: string; 
 }
 
