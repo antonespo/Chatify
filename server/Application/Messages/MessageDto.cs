@@ -8,6 +8,7 @@ namespace Application.Messages
 {
     public class MessageDto
     {
+        public Guid Id { get; set; }
         public string Body { get; set; }
         public DateTime CreatedAt { get; set; }
         public BasicAppUser BasicAppUser { get; set; }

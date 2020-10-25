@@ -19,3 +19,9 @@ export interface IPhoto {
   createdAt: Date;
   description: string;
 }
+
+export interface IBasicAppUser {
+  userName: string;
+  displayName: string;
+  image: string; 
+}

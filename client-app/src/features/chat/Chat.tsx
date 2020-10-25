@@ -3,7 +3,7 @@ import { Segment, Form, Button, Grid } from "semantic-ui-react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { Form as FinalForm, Field } from "react-final-form";
 import { observer } from "mobx-react-lite";
-import { IMessage } from "../../app/models/message";
+import { IMessage, IMessageDto } from "../../app/models/message";
 // RCE CSS
 import "react-chat-elements/dist/main.css";
 // MessageBox component
@@ -11,6 +11,7 @@ import { MessageBox } from "react-chat-elements";
 import TextInput from "./../../app/common/form/TextInput";
 import { format } from "date-fns";
 import { ThemeProvider, MessageList } from "@livechat/ui-kit";
+import { LoadingComponent } from "../../app/layout/LoadingComponent";
 
 const Chat = () => {
   const rootStore = useContext(RootStoreContext);
@@ -20,6 +21,8 @@ const Chat = () => {
     createHubConnection,
     stopHubConnection,
     addMessage,
+    topic,
+    loadingChat,
   } = rootStore.ChatStore;
 
   useEffect(() => {
@@ -33,13 +36,24 @@ const Chat = () => {
     };
   }, [createHubConnection, stopHubConnection]);
 
-  const messageSide = (message: IMessage) => {
-    if (message.userName === user?.username) {
+  const messageSide = (message: IMessageDto) => {
+    if (message.basicAppUser.userName === user?.username) {
       return "right";
     } else {
       return "left";
     }
   };
+
+  const newMessage = (values: any) => {
+    var message: IMessage = {
+      body: values.body,
+      userName: user?.username!,
+      topicId: topic,
+    };
+    addMessage(message);
+  };
+
+  if (loadingChat) return <LoadingComponent content="Loading chat..." />;
 
   return (
     <Segment attached>
@@ -53,7 +67,7 @@ const Chat = () => {
                   position={messageSide(message)}
                   type={"text"}
                   text={message.body}
-                  title={message.userName}
+                  title={message.basicAppUser.userName}
                   dateString={format(new Date(message.createdAt), "k:mm")}
                 />
               ))}
@@ -61,9 +75,14 @@ const Chat = () => {
         </div>
         <br />
         <FinalForm
-          onSubmit={addMessage}
+          onSubmit={newMessage}
           render={({ handleSubmit, submitting, form }) => (
-            <Form onSubmit={() => handleSubmit()!.then(() => form.reset())}>
+            <Form
+              onSubmit={() => {
+                handleSubmit();
+                form.reset();
+              }}
+            >
               <Grid columns="two" divided>
                 <Grid.Row>
                   <Grid.Column width={14}>

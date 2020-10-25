@@ -31,33 +31,32 @@ namespace API.SignalR {
             }
 
             var message = await mediator.Send (command);
-            // await Clients.All.SendAsync ("ReceiveMessage", message);
-            await Clients.Group ("GruppoLavoro").SendAsync ("ReceiveMessage", message);
+            await Clients.Group (command.TopicId.ToString()).SendAsync ("ReceiveMessage", message);
         }
 
-        public async Task SendAllMessages () {
+        public async Task SendAllMessages (string topicId) {
             string username = GetUsername ();
 
-            var res = await mediator.Send (new List.Query ());
+            var res = await mediator.Send (new List.Query { TopicId = Guid.Parse( topicId)});
             await Clients.Caller.SendAsync ("ReceiveAllMessages", res);
         }
 
-        public async Task AddToGroup (string groupName) {
+        public async Task AddToGroup (string topicIdGroup) {
             string username = GetUsername ();
 
-            await Groups.AddToGroupAsync (Context.ConnectionId, groupName);
+            await Groups.AddToGroupAsync (Context.ConnectionId, topicIdGroup);
 
-            await Clients.Group (groupName)
-                .SendAsync ("Send", $"{username} has joined the group {groupName}.");
+            await Clients.Group (topicIdGroup)
+                .SendAsync ("NewViewer", $"{username} has joined the group {topicIdGroup}.");
         }
 
-        public async Task RemoveFromGroup (string groupName) {
+        public async Task RemoveFromGroup (string topicIdGroup) {
             string username = GetUsername ();
 
-            await Groups.RemoveFromGroupAsync (Context.ConnectionId, groupName);
+            await Groups.RemoveFromGroupAsync (Context.ConnectionId, topicIdGroup);
 
-            await Clients.Group (groupName)
-                .SendAsync ("Send", $"{username} has left the group {groupName}.");
+            await Clients.Group (topicIdGroup)
+                .SendAsync ("Send", $"{username} has left the group {topicIdGroup}.");
         }
     }
 }
