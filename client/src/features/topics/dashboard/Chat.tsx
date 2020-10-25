@@ -1,19 +1,19 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { Segment, Form, Button, Grid, Header } from "semantic-ui-react";
-import { RootStoreContext } from "../../app/stores/rootStore";
+import { Segment, Form, Button, Grid, Header, Modal } from "semantic-ui-react";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 import { Form as FinalForm, Field } from "react-final-form";
 import { observer } from "mobx-react-lite";
-import { IMessage, IMessageDto } from "../../app/models/message";
+import { IMessage, IMessageDto } from "../../../app/models/message";
 // RCE CSS
 import "react-chat-elements/dist/main.css";
 // MessageBox component
 import { MessageBox } from "react-chat-elements";
-import TextInput from "./../../app/common/form/TextInput";
+import TextInput from "../../../app/common/form/TextInput";
 import { format } from "date-fns";
 import { ThemeProvider, MessageList } from "@livechat/ui-kit";
-import { LoadingComponent } from "../../app/layout/LoadingComponent";
-import NotFound from './../../app/layout/NotFound';
-import { Link } from 'react-router-dom';
+import { LoadingComponent } from "../../../app/layout/LoadingComponent";
+import NotFound from "../../../app/layout/NotFound";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
   const rootStore = useContext(RootStoreContext);
@@ -55,11 +55,11 @@ const Chat = () => {
   };
 
   if (loadingChat) return <LoadingComponent content="Loading chat..." />;
-  if (!loadingChat && !topic?.id) return <NotFound/>;
- 
+  if (!loadingChat && !topic?.id) return <NotFound />;
+
   return (
     <Fragment>
-      <Header>{topic?.name}</Header>
+      <Modal.Header>{topic?.name}</Modal.Header>
       <Segment attached>
         <ThemeProvider>
           <div style={{ width: "auto", height: 500 }}>

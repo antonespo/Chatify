@@ -10,7 +10,6 @@ import NotFound from "./NotFound";
 import { ToastContainer } from "react-toastify";
 import { RootStoreContext } from "../stores/rootStore";
 import { LoadingComponent } from "./LoadingComponent";
-import Chat from "./../../features/chat/Chat";
 import ProfilePage from "./../../features/profiles/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
 
@@ -60,19 +59,6 @@ const App = () => {
               <Navbar />
               <Container style={{ marginTop: "7em" }}>
                 <ProfilePage {...props} />
-              </Container>
-            </Fragment>
-          )}
-        />
-
-        <PrivateRoute
-          exact
-          path={"/chat"}
-          render={(props) => (
-            <Fragment>
-              <Navbar />
-              <Container style={{ marginTop: "7em" }}>
-                <Chat />
               </Container>
             </Fragment>
           )}

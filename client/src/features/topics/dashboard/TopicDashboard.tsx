@@ -1,20 +1,9 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import {
-  Card,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Loader,
-  Segment,
-} from "semantic-ui-react";
+import React, { useContext, useEffect } from "react";
+import { Card, Grid, Header } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../../app/stores/rootStore";
-import InfiniteScroll from "react-infinite-scroller";
-import ProfileCard from "../../profiles/ProfileCard";
-import TopicCard from "./TopicCard";
 import { LoadingComponent } from "../../../app/layout/LoadingComponent";
-import { Link } from "react-router-dom";
+import ModalChat from "./ModalChat";
 
 const ActivityDashboard: React.FC = () => {
   const rootStore = useContext(RootStoreContext);
@@ -54,13 +43,9 @@ const ActivityDashboard: React.FC = () => {
         <Header content={`Choose one topic`} />
         <Card.Group itemsPerRow={4}>
           {topics.map((topic) => (
-            <TopicCard key={topic.id} topic={topic} />
+            <ModalChat key={topic.id} topic={topic} />
+            // <TopicCard key={topic.id} topic={topic} />
           ))}
-          <Card centered  as={Link} to={`/chat`}>
-            <Card.Description textAlign="center">
-              <Icon name="plus circle" color="teal" size="massive" fitted></Icon>
-            </Card.Description>
-          </Card>
         </Card.Group>
       </Grid.Column>
       <Grid.Column width={4}>

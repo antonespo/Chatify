@@ -212,8 +212,86 @@ namespace Persistence
                             },
                             new Message
                             {
-                                Body = "Ciao a tutti da Antonio Espo nel topic più bello",
+                                Body = "Ciao a tutti da Antonio Espo nel topic piï¿½ bello",
                                 AuthorId = "d"
+                            }
+                        }
+                    },
+                    new Topic
+                    {
+                        Name = "Art",
+                        Description = "In questo topic si parla solo di arte",
+                        Members = new List<Member>
+                        {
+                            new Member
+                            {
+                                AppUserId = "a"
+                            },
+                            new Member
+                            {
+                                AppUserId = "c"
+                            }
+                        },
+                        Messages = new List<Message>
+                        {
+                            new Message
+                            {
+                                Body = "Ciao a tutti da Giorgio nel topic dell'arte",
+                                AuthorId = "a"
+                            },
+                            new Message
+                            {
+                                Body = ":) :) :)",
+                                AuthorId = "a"
+                            },
+                            new Message
+                            {
+                                Body = "Ciao a tutti da Maria nel topic dell'arte",
+                                AuthorId = "c"
+                            },
+                            new Message
+                            {
+                                Body = "Ciao a tutti da Maria nel topic del arteee, che bellooo",
+                                AuthorId = "c"
+                            }
+                        }
+                    },
+                    new Topic
+                    {
+                        Name = "Theatre",
+                        Description = "In questo topic si parla solo di teatro",
+                        Members = new List<Member>
+                        {
+                            new Member
+                            {
+                                AppUserId = "a"
+                            },
+                            new Member
+                            {
+                                AppUserId = "b"
+                            }
+                        },
+                        Messages = new List<Message>
+                        {
+                            new Message
+                            {
+                                Body = "Ciao a tutti da Giorgio nel topic del teatro",
+                                AuthorId = "a"
+                            },
+                            new Message
+                            {
+                                Body = ":) :) :)",
+                                AuthorId = "a"
+                            },
+                            new Message
+                            {
+                                Body = "Ciao a tutti da Anna Maria nel topic del teatro",
+                                AuthorId = "b"
+                            },
+                            new Message
+                            {
+                                Body = "Ciao a tuttiiii ancora",
+                                AuthorId = "b"
                             }
                         }
                     }
