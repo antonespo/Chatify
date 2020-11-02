@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Modal, Button, Icon, Card, Image } from "semantic-ui-react";
+import React, { useContext } from "react";
+import { Modal, Icon, Card, Image } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import Chat from "./Chat";

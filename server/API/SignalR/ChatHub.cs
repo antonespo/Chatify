@@ -31,13 +31,13 @@ namespace API.SignalR {
             }
 
             var message = await mediator.Send (command);
-            await Clients.Group (command.TopicId.ToString()).SendAsync ("ReceiveMessage", message);
+            await Clients.Group (command.TopicId.ToString ()).SendAsync ("ReceiveMessage", message);
         }
 
         public async Task SendAllMessages (string topicId) {
             string username = GetUsername ();
 
-            var res = await mediator.Send (new List.Query { TopicId = Guid.Parse( topicId)});
+            var res = await mediator.Send (new List.Query { TopicId = Guid.Parse (topicId) });
             await Clients.Caller.SendAsync ("ReceiveAllMessages", res);
         }
 

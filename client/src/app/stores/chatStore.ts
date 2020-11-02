@@ -48,7 +48,9 @@ export default class ChatStore {
     });
 
     this.hubConnection.on("NewViewer", (message: string) => {
-      toast.info(message + this.rootStore.TopicStore.currentTopic?.name, { position: "top-right" });
+      toast.info(message + this.rootStore.TopicStore.currentTopic?.name, {
+        position: "top-right",
+      });
     });
   };
 

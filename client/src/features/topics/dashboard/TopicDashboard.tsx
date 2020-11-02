@@ -1,18 +1,17 @@
 import React, { useContext, useEffect } from "react";
-import { Card, Grid, Header } from "semantic-ui-react";
+import { Card, Grid, Segment } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import { LoadingComponent } from "../../../app/layout/LoadingComponent";
 import ModalChat from "./ModalChat";
+import ModalAddTopic from "./ModalAddTopic";
 
-const ActivityDashboard: React.FC = () => {
+const TopicDashboard: React.FC = () => {
   const rootStore = useContext(RootStoreContext);
-  const { user } = rootStore.UserStore;
   const {
     topics,
     createHubConnection,
     stopHubConnection,
-    addTopic,
     loadingTopics,
   } = rootStore.TopicStore;
 
@@ -27,32 +26,25 @@ const ActivityDashboard: React.FC = () => {
     };
   }, [createHubConnection, stopHubConnection]);
 
-  // const newTopic = (values: any) => {
-  //   var message: IMessage = {
-  //     body: values.body,
-  //     topicId: topic,
-  //   };
-  //   addMessage(message);
-  // };
-
   if (loadingTopics) return <LoadingComponent content="Loading topics..." />;
 
   return (
     <Grid>
-      <Grid.Column width={12}>
-        <Header content={`Choose one topic`} />
-        <Card.Group itemsPerRow={4}>
-          {topics.map((topic) => (
-            <ModalChat key={topic.id} topic={topic} />
-            // <TopicCard key={topic.id} topic={topic} />
-          ))}
-        </Card.Group>
-      </Grid.Column>
-      <Grid.Column width={4}>
-        <Header content={`Filters`} />
-      </Grid.Column>
+      <Grid.Row>
+        <ModalAddTopic />
+      </Grid.Row>
+      <Grid.Row>
+        <Segment clearing>
+          <Card.Group itemsPerRow={4}>
+            {topics.map((topic) => (
+              <ModalChat key={topic.id} topic={topic} />
+              // <TopicCard key={topic.id} topic={topic} />
+            ))}
+          </Card.Group>
+        </Segment>
+      </Grid.Row>
     </Grid>
   );
 };
 
-export default observer(ActivityDashboard);
+export default observer(TopicDashboard);

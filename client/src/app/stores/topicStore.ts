@@ -16,7 +16,9 @@ export default class TopicStore {
     this.rootStore = rootStore;
   }
 
-  @observable loadingTopics = true;
+  @observable loadingTopics = false;
+
+  @observable addTopicLoading = false; 
 
   @observable currentTopic: ITopicDto | null = null; 
 
@@ -81,10 +83,17 @@ export default class TopicStore {
   };
 
   @action addTopic = async (topic: ITopic) => {
+    this.addTopicLoading = true;
     try {
       await this.hubConnection!.invoke("CreateTopic", topic);
+      runInAction(()=>{
+        this.addTopicLoading = false;
+      })
     } catch (error) {
       console.log(error);
+      runInAction(()=>{
+        this.addTopicLoading = false;
+      })
     }
   };
 }
