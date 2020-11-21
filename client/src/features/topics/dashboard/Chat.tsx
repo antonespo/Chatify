@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { ThemeProvider, MessageList } from "@livechat/ui-kit";
 import { LoadingComponent } from "../../../app/layout/LoadingComponent";
 import NotFound from "../../../app/layout/NotFound";
-import { Link } from "react-router-dom";
+import { history } from "./../../../index";
 
 const Chat = () => {
   const rootStore = useContext(RootStoreContext);
@@ -60,9 +60,10 @@ const Chat = () => {
   return (
     <Fragment>
       <Modal.Header>{topic?.name}</Modal.Header>
+      <Modal.Content>{topic?.description}</Modal.Content>
       <Segment attached>
         <ThemeProvider>
-          <div style={{ width: "auto", height: 500 }}>
+          <div style={{ width: "auto", height: 270 }}>
             <MessageList active>
               {chat &&
                 chat.map((message) => (
@@ -72,6 +73,9 @@ const Chat = () => {
                     type={"text"}
                     text={message.body}
                     title={message.basicAppUser.displayName}
+                    onTitleClick={() =>
+                      history.push("/profile/" + message.basicAppUser.userName)
+                    }
                     dateString={format(new Date(message.createdAt), "k:mm")}
                   />
                 ))}
@@ -89,14 +93,14 @@ const Chat = () => {
               >
                 <Grid columns="two" divided>
                   <Grid.Row>
-                    <Grid.Column width={14}>
+                    <Grid.Column width={13}>
                       <Field
                         name="body"
                         component={TextInput}
                         placeholder="Type message..."
                       />
                     </Grid.Column>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={3}>
                       <Button
                         // content="Add Message"
                         // labelPosition="left"

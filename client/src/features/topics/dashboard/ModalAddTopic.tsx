@@ -12,10 +12,9 @@ const ModalAddTopic = () => {
   const { addTopic, addTopicLoading } = RootStore.TopicStore;
   const [modalOpen, setModalOpen] = useState(false);
 
-
   const closeModal = () => {
     setModalOpen(false);
-  }
+  };
 
   const handleFinalFormSubmit = async (values: any) => {
     await addTopic(values);
@@ -31,40 +30,43 @@ const ModalAddTopic = () => {
       closeIcon
       open={modalOpen}
       onClose={closeModal}
-      trigger={<Button primary content="Add topic" floated="right" onClick={()=>setModalOpen(true)}/>}
+      trigger={
+        <Button
+          primary
+          content="Add topic"
+          floated="right"
+          onClick={() => setModalOpen(true)}
+        />
+      }
       centered={false}
     >
       <Modal.Header>bla bla</Modal.Header>
       <Modal.Content>
-          <FinalForm
-            validate={validate}
-            onSubmit={handleFinalFormSubmit}
-            render={({ handleSubmit, invalid, pristine }) => (
-              <Form onSubmit={handleSubmit} loading={addTopicLoading}>
-                <Field
-                  name="name"
-                  placeholder="Name"
-                  component={TextInput}
-                />
-                <Field
-                  name="description"
-                  placeholder="Description"
-                  component={TextAreaInput}
-                  rows={2}
-                />
-                <Button
-                  loading={addTopicLoading}
-                  floated="right"
-                  positive
-                  disabled={addTopicLoading || invalid || pristine}
-                  type="submit"
-                  content="Submit"
-                />
-                <br />
-                <br />
-              </Form>
-            )}
-          />
+        <FinalForm
+          validate={validate}
+          onSubmit={handleFinalFormSubmit}
+          render={({ handleSubmit, invalid, pristine }) => (
+            <Form onSubmit={handleSubmit} loading={addTopicLoading}>
+              <Field name="name" placeholder="Name" component={TextInput} />
+              <Field
+                name="description"
+                placeholder="Description"
+                component={TextAreaInput}
+                rows={2}
+              />
+              <Button
+                loading={addTopicLoading}
+                floated="right"
+                positive
+                disabled={addTopicLoading || invalid || pristine}
+                type="submit"
+                content="Submit"
+              />
+              <br />
+              <br />
+            </Form>
+          )}
+        />
       </Modal.Content>
     </Modal>
   );

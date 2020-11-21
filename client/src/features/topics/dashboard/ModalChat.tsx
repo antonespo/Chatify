@@ -17,6 +17,7 @@ const ModalChat: React.FC<IProps> = ({ topic }) => {
   return (
     <Modal
       closeIcon
+      size="small"
       trigger={
         <Card
           onClick={() => {

@@ -40,4 +40,19 @@ body {
   font-weight: normal;
 }
 
+.ui.modal .header{
+  background-color: #83beeca4;
+}
+
+.ui.modal .content{
+  background-color: #e8f1f893;
+}
+
+.ui.modal > .attached {
+  height: 350px;
+}
+
+.lc-1f0e56z {
+  height: 270px !important;
+}
 /*end home page styles*/
